@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+4<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -437,7 +437,7 @@ footer{
   font-family:'Cormorant Garamond',serif;
   font-size:0.7rem;letter-spacing:0.38em;
   color:var(--tan-light);
-  text-transform:uppercase;
+  text-transform:uppercase;5
   margin-bottom:14px;
 }
 .about-title{
@@ -605,6 +605,64 @@ footer{
   background:var(--cream);color:var(--tan);
   border:1px solid var(--border);border-radius:20px;
 }
+
+/* ── HAMBURGER MOBILE NAV ── */
+.hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;
+  background:none;border:none;cursor:pointer;padding:6px;
+  border-radius:8px;
+  transition:background 0.2s;
+}
+.hamburger:hover{background:var(--cream);}
+.hamburger span{
+  display:block;width:22px;height:1.5px;
+  background:var(--tan-dark);border-radius:2px;
+  transition:all 0.3s ease;
+  transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+.mobile-menu{
+  display:none;
+  position:absolute;top:64px;left:0;right:0;
+  background:rgba(250,246,241,0.98);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 8px 24px rgba(100,70,50,0.08);
+  z-index:199;
+  overflow:hidden;
+  max-height:0;
+  transition:max-height 0.35s ease;
+}
+.mobile-menu.open{
+  display:block;
+  max-height:600px;
+}
+.mobile-menu a{
+  display:block;
+  padding:14px 28px;
+  font-size:0.88rem;letter-spacing:0.06em;
+  color:var(--text-mid);text-decoration:none;
+  border-bottom:1px solid var(--border);
+  transition:background 0.18s,color 0.18s;
+}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a:hover,
+.mobile-menu a.active{
+  background:var(--cream);
+  color:var(--tan-dark);
+  padding-left:36px;
+}
+
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;}
+  nav{position:sticky;}
+}
 </style>
 </head>
 <body>
@@ -623,7 +681,20 @@ footer{
     <a href="#" onclick="showPage('contact')" id="nav-contact">聯絡我們</a>
     <a href="#" onclick="showPage('traffic')" id="nav-traffic">交通停車</a>
   </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('about');closeMobileMenu()" id="mnav-about">關於我們</a>
+  <a href="#" onclick="showPage('rita');closeMobileMenu()" id="mnav-rita">芮塔</a>
+  <a href="#" onclick="showPage('xiaozhen');closeMobileMenu()" id="mnav-xiaozhen">小臻</a>
+  <a href="#" onclick="showPage('zhanzhan');closeMobileMenu()" id="mnav-zhanzhan">沾沾</a>
+  <a href="#" onclick="showPage('class');closeMobileMenu()" id="mnav-class">創業班</a>
+  <a href="#" onclick="showPage('corp');closeMobileMenu()" id="mnav-corp">企業包班</a>
+  <a href="#" onclick="showPage('contact');closeMobileMenu()" id="mnav-contact">聯絡我們</a>
+  <a href="#" onclick="showPage('traffic');closeMobileMenu()" id="mnav-traffic">交通停車</a>
+</div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -792,9 +863,14 @@ footer{
             <span class="sp-tag">男仕美甲</span>
           </div>
           <div class="stylist-profile-desc">
-            美業資歷8年，服務客製化客戶超過10,000+。<br>
-            擅長礦石暈染、花卉花磚，將自然之美融入每一片指甲。<br>
-            專攻咬甲矯正已4年以上，以溫柔而專業的手法，幫助每位客人找回健康甲面。
+            藝術暈染到甲面重建,陪你走過 10,000+ 次的指尖轉變。✨ <br>
+       🌿指尖上的藝術: 礦石暈染、手繪花卉,讓大自然的美麗成為你的日常。 <br>
+       🛠️ 問題甲的救星:咬甲矯正 (5年)<br>
+           捲甲嵌甲 (3年):專業手法舒緩不適。<br>
+       🦶 足部微型SPA: 特色手工足底護理,讓我們細心呵護您的每一步。 <br>
+       🤰 孕婦、男性皆歡迎|提供最安心、專業的修甲體驗。 <br>
+       🎂 寵愛老友:長期客戶生日當月,造型美甲 9 折。<br>
+            
           </div>
         </div>
       </div>
@@ -809,13 +885,17 @@ footer{
           <div class="stylist-profile-tags">
             <span class="sp-tag">日系清新</span>
             <span class="sp-tag">貓眼鏡面</span>
-            <span class="sp-tag">溫柔手法</span>
+            <span class="sp-tag">小紅書爆款</span>
             <span class="sp-tag">指甲調整</span>
           </div>
           <div class="stylist-profile-desc">
-            細膩手法深受客戶喜愛，擅長日系清新風格與精緻小物設計。<br>
-            用溫柔的力道與耐心，讓每次保養都成為放鬆的享受。<br>
-            保養搭配凝膠享8折優惠，長期客更有壽星9折等專屬驚喜。
+            日系美學與細膩保養專家 以極致細膩的手法,將指尖保養轉化為一場舒壓放鬆的療癒享受。<br>
+            🌿 指尖上的清新: 日系清新風格、小紅書氣質輕新款,用精緻小物設計點綴妳的日常。 <br>
+            🛠️ 溫柔的救星: #細膩手法:深受客戶喜愛的溫柔力道,細心呵護每一處細節。<br> 
+                極致耐心:專注於保養過程的完美,讓每次服務都是放鬆享受。 <br>
+            🦶 保養即藝術: 注重保養與美感的平衡,讓您的雙手展現最純粹的輕盈質感。<br> 
+            ✨ 小臻限定寵愛: 預約「保養搭配凝膠」即享 8 折 優惠。 <br>
+            🎂 寵愛老友: 長期客戶壽星當月,專屬享造型美甲 9 折 驚喜。<br>
           </div>
         </div>
       </div>
@@ -834,9 +914,13 @@ footer{
             <span class="sp-tag">指定8折</span>
           </div>
           <div class="stylist-profile-desc">
-            風格多變，從可愛到個性都難不倒。<br>
-            擅長貓眼、鏡面、珠光等特殊效果，讓指尖成為最耀眼的存在。<br>
-            指定沾沾享優惠價格，為原價8折，2026年最新價目表歡迎詢問。
+            玩轉風格與特殊光影專家店內資歷老么但技術滿點!風格多變大膽,讓妳的指尖成為最耀眼的存在。✨<br>
+           🌿 指尖上的魔幻: 擅長貓眼、鏡面、珠光等特殊效果,精準掌握光影流動的極致美感。 <br>
+           🛠️ 風格的救星: 風格多變:從可愛韓系風到日系侘寂感,各類風格都難不倒她。 <br>
+               個性設計:擅長精緻設計與特殊效果疊加,打造專屬妳的個性符號。 <br>
+            ✨視覺新體驗: 追求極致的亮眼質感,用滿點的技術為妳的作品注入年輕靈魂。 <br>
+           ✨ 沾沾限定寵愛: 指定預約即享「新秀優惠價」(價目表已包含 8-9 折優惠,歡迎索取 2026 最新報價)。<br>
+           🎂 寵愛老友: 長期客戶壽星當月,專屬享造型美甲 9 折 驚喜。<br>
           </div>
         </div>
       </div>
@@ -1019,7 +1103,7 @@ footer{
       <div class="price-head"><span>服務項目</span><span>價格</span></div>
       <div class="price-row"><span>透明凝膠</span><span class="price-amt">$980</span></div>
       <div class="price-row"><span>單色凝膠 <span class="price-note">可跳1色</span></span><span class="price-amt">$1,050</span></div>
-      <div class="price-row"><span>鏡面 / 貓眼</span><span class="price-amt">$1,350</span></div>
+      <div class="price-row"><span>鏡面 / 貓眼</span><span class="price-amt">$1,250</span></div>
       <div class="price-row"><span>凝膠造型</span><span class="price-amt">$1,300 UP</span></div>
     </div>
   </div>
@@ -1146,7 +1230,7 @@ footer{
     <div class="price-table">
       <div class="price-head"><span>服務項目</span><span>續做</span><span style="color:var(--tan)">不續做</span></div>
       <div class="price-row"><span>本店卸甲</span><span class="price-amt">$150</span><span class="price-amt">$550</span></div>
-      <div class="price-row"><span>他店卸甲</span><span class="price-amt">$250</span><span class="price-amt">$650</span></div>
+      <div class="price-row"><span>他店卸甲</span><span class="price-amt">$250</span><span class="price-amt">$800</span></div>
     </div>
   </div>
   <div class="price-block">
@@ -1228,10 +1312,22 @@ footer{
   </div>
   <div class="note-box">
     <strong>報名與注意事項</strong><br>
-    ・課程採一對一，確保學習品質，需事先預約排程。<br>
-    ・A班與B班可分開報名，亦可搭配報名享組合優惠。<br>
-    ・課程時間彈性安排，請透過 LINE 私訊討論。<br>
-    ・支援無卡分期，詳情請洽詢。
+ 課程體系介紹<br>
+A班：創業基礎課程 (20hr) <br>
+ 課程配置：包含 1 堂精華線上理論與 3 堂扎實技術實操。<br>  
+ 教學核心：從零開始建立專業根基，內容涵蓋美甲基礎、礦石暈染與花卉手繪。<br> 
+ 品質承諾：為確保學員完全吸收，下課時間將視個人進度彈性微調。<br>  
+B班：沙龍專業課程 (20hr)  課程配置：包含 3 堂技術實操與 1 堂極具價值的「真人服務實踐」課程。<br> 
+ 教學核心：模擬沙龍現場流程，帶領您從技術面銜接至實際客戶服務。<br>  
+品質承諾：教學時數將依學員掌握狀況彈性延長，保證學習成效。<br> 
+ 🎁 限時優惠方案早鳥報名禮：凡於早鳥期間完成預約，即贈送「專屬早鳥材料大禮包」。<br> 
+ 1 對 2 團報優惠：若接受 1 對 2 授課模式（不可指定時段），學員皆享 9 折 優惠；一人即可開班，兩人即滿班。 <br> 
+兩人同行專案：兩位學員同時報名同一課程，直接享有最優 8.5 折 折扣。<br>  
+課程組合價：同時報名 A+B 班別，另有驚喜組合優惠。<br>  
+📝 報名須知與注意事項小班制精緻教學請務必事先預約排程以確保名額。<br>  
+材料全額含括：報名費用已包含所有專業操作耗材，學員無需自行準備，空手即可入學。 <br>
+彈性預約排課：上課時段具備高度彈性，請透過官方 LINE 私訊討論最適合您的學習時間。<br>  
+支援無卡分期：為了減輕學員創業負擔，我們提供無卡分期付款方案，詳情請洽詢。<br> 
     <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
       <a class="btn btn-primary" href="https://line.me/R/ti/p/@328ydgex" target="_blank" style="font-size:0.78rem">LINE 教學洽詢 @328ydgex</a>
       <a class="btn btn-outline" href="https://line.me/R/ti/p/@ritanail2018" target="_blank" style="font-size:0.78rem">LINE 預約 @ritanail2018</a>
@@ -1392,16 +1488,42 @@ try { document.getElementById('heroLogo').src = LOGO; } catch(e){}
 
 const pages = document.querySelectorAll('.page');
 const navLinks = document.querySelectorAll('.nav-links a');
+const mobileLinks = document.querySelectorAll('.mobile-menu a');
 
 function showPage(id) {
   pages.forEach(p => p.classList.remove('active'));
   navLinks.forEach(l => l.classList.remove('active'));
+  mobileLinks.forEach(l => l.classList.remove('active'));
   const page = document.getElementById('page-' + id);
   const nav = document.getElementById('nav-' + id);
+  const mnav = document.getElementById('mnav-' + id);
   if (page) page.classList.add('active');
   if (nav) nav.classList.add('active');
+  if (mnav) mnav.classList.add('active');
   window.scrollTo(0, 0);
 }
+
+// Hamburger toggle
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu() {
+  hamburgerBtn.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+hamburgerBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+});
+
+// Close when clicking outside
+document.addEventListener('click', function(e) {
+  if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
 </script>
 </body>
 </html>
