@@ -32,8 +32,10 @@ body{
 }
 
 /* NAV */
-nav{
+.nav-wrapper{
  position:sticky;top:0;z-index:200;
+}
+nav{
  background:rgba(250,246,241,0.96);
  backdrop-filter:blur(12px);
  border-bottom:1px solid var(--border);
@@ -627,19 +629,17 @@ footer{
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 .mobile-menu{
-  display:none;
-  position:absolute;top:64px;left:0;right:0;
+  display:block;
+  position:static;
   background:rgba(250,246,241,0.98);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
   box-shadow:0 8px 24px rgba(100,70,50,0.08);
-  z-index:199;
   overflow:hidden;
   max-height:0;
   transition:max-height 0.35s ease;
 }
 .mobile-menu.open{
-  display:block;
   max-height:600px;
 }
 .mobile-menu a{
@@ -666,6 +666,7 @@ footer{
 </style>
 </head>
 <body>
+<div class="nav-wrapper">
 <nav>
   <a class="nav-logo" href="#" onclick="showPage('home')">
     <img id="logoImg" src="" alt="Rita Nail Design">
@@ -694,6 +695,7 @@ footer{
   <a href="#" onclick="showPage('corp');closeMobileMenu()" id="mnav-corp">企業包班</a>
   <a href="#" onclick="showPage('contact');closeMobileMenu()" id="mnav-contact">聯絡我們</a>
   <a href="#" onclick="showPage('traffic');closeMobileMenu()" id="mnav-traffic">交通停車</a>
+</div>
 </div>
 
 <!-- HOME -->
